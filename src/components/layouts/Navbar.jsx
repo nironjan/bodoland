@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 
-import LOGO from "../../assets/logo.svg";
 import SideMenu from "./SideMenu";
 import { Link } from "react-router-dom";
+import ImageKit from "../ImageKit";
 
 const Navbar = ({ activeMenu }) => {
   const [openSideMenu, setOpenSideMenu] = useState(false);
@@ -23,7 +23,11 @@ const Navbar = ({ activeMenu }) => {
         )}
       </button>
       <Link to="/" className="flex items-center">
-        <img src={LOGO} alt="logo" className="h-[34px] md:h-[26px]" />
+        <ImageKit
+          src="https://ik.imagekit.io/thebodoland/site/logo"
+          alt="logo"
+          className="h-[34px] md:h-[26px]"
+        />
         <span className="logo-font text-orange-500 hidden md:block md:text-xl leading-3.5 mt-1 font-semibold">
           The Bodoland
         </span>

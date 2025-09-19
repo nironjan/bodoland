@@ -1,5 +1,6 @@
 import React from "react";
 import { LuEye, LuHeart, LuTrash2 } from "react-icons/lu";
+import ImageKit from "../ImageKit";
 
 const BlogPostSumaryCard = ({
   title,
@@ -16,7 +17,7 @@ const BlogPostSumaryCard = ({
       className="group flex items-start gap-4 bg-white p-3 mb-5 rounded-lg cursor-pointer"
       onClick={onClick}
     >
-      <img src={imgUrl} alt={title} className="w-16 h-16 rounded-lg" />
+      <ImageKit src={imgUrl} alt={title} className="w-16 h-16 rounded-lg" />
       <div className="flex-1">
         {/* Title */}
         <h3 className="text-[13px] md:text-[15px] text-black font-medium">

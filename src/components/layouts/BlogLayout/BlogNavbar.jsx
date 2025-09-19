@@ -10,6 +10,7 @@ import ProfileInfoCard from "../../Cards/ProfileInfoCard";
 import Login from "../../Auth/Login";
 import SignUp from "../../Auth/SignUp";
 import Modal from "../../Modal";
+import ImageKit from "../../ImageKit";
 
 const BlogNavbar = ({ activeMenu }) => {
   const { user, setOpenAuthForm } = useContext(UserContext);
@@ -34,7 +35,13 @@ const BlogNavbar = ({ activeMenu }) => {
               )}
             </button>
             <Link to="/" className="flex items-center">
-              <img src={Logo} alt="logo" className="h-[34px] md:h-[26px]" />
+              <ImageKit
+                src="https://ik.imagekit.io/thebodoland/site/logo"
+                alt="logo"
+                className="h-[34px] md:h-[26px]"
+                h={43}
+              />
+
               <span className="logo-font text-orange-500 hidden md:block md:text-xl leading-3.5 mt-1 font-semibold">
                 The Bodoland
               </span>

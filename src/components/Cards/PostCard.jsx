@@ -1,4 +1,5 @@
 import React from "react";
+import ImageKit from "../ImageKit";
 
 const PostCard = ({ title, coverImageUrl, tags, onClick }) => {
   return (
@@ -8,10 +9,12 @@ const PostCard = ({ title, coverImageUrl, tags, onClick }) => {
       </h6>
 
       <div className="flex items-start gap-4 mt-2">
-        <img
+        <ImageKit
           src={coverImageUrl}
           alt={title}
           className="w-14 h-14 object-cover rounded"
+          w={56}
+          h={56}
         />
 
         <h2 className="text-sm md:text-sm font-medium mb-2 line-clamp-3">

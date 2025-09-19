@@ -1,4 +1,5 @@
 import React from "react";
+import ImageKit from "../../../components/ImageKit";
 
 const FeaturedBlogPost = ({
   title,
@@ -17,7 +18,7 @@ const FeaturedBlogPost = ({
     >
       {/* Image Top on Mobile, Left on Desktop */}
       <div className="md:col-span-6">
-        <img
+        <ImageKit
           src={coverImageUrl}
           alt={title}
           className="w-full h-52 md:h-64 object-cover"

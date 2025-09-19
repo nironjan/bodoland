@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ImageKit from "../ImageKit";
 
 const BlogPostSummaryCard = ({
   title,
@@ -17,10 +18,11 @@ const BlogPostSummaryCard = ({
       className="bg-white shadow-lg shadow-gray-100 rounded-xl overflow-hidden cursor-pointer"
       onClick={onClick}
     >
-      <img
+      <ImageKit
         src={coverImageUrl}
         alt={title}
         className="w-full h-64 object-cover"
+        h={256}
       />
 
       <div className="p-4 md:p-6">
@@ -44,10 +46,12 @@ const BlogPostSummaryCard = ({
         </div>
 
         <div className="flex items-center">
-          <img
+          <ImageKit
             src={authProfileImg}
             alt={authorName}
             className="w-8 h-8 rounded-full mr-2"
+            w={32}
+            h={32}
           />
 
           <div>

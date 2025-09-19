@@ -12,6 +12,7 @@ import MarkdownContent from "./components/MarkdownContent";
 import SharePost from "./components/SharePost";
 import { sanitizeMarkdown } from "../../utils/helper";
 import BlogPostViewSkeleton from "../../components/Loader/BlogPostViewSkeleton";
+import ImageKit from "../../components/ImageKit";
 
 const BlogPostView = () => {
   const { slug } = useParams();
@@ -155,10 +156,12 @@ const BlogPostView = () => {
                 </div>
 
                 {/* Cover image */}
-                <img
+                <ImageKit
                   src={blogPostData.coverImageUrl}
                   alt={blogPostData.title}
                   className="w-full h-56 sm:h-72 md:h-80 lg:h-96 object-cover rounded-lg mb-6"
+                  w={1200}
+                  h={675}
                 />
 
                 {/* Description */}
