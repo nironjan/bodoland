@@ -3,6 +3,7 @@ import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 
 import LOGO from "../../assets/logo.svg";
 import SideMenu from "./SideMenu";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ activeMenu }) => {
   const [openSideMenu, setOpenSideMenu] = useState(false);
@@ -21,7 +22,12 @@ const Navbar = ({ activeMenu }) => {
           <HiOutlineMenu className="text-2xl cursor-pointer" />
         )}
       </button>
-      <img src={LOGO} alt="site logo" className="h-[26px]" />
+      <Link to="/" className="flex items-center">
+        <img src={LOGO} alt="logo" className="h-[34px] md:h-[26px]" />
+        <span className="logo-font text-orange-500 hidden md:block md:text-xl leading-3.5 mt-1 font-semibold">
+          The Bodoland
+        </span>
+      </Link>
       {openSideMenu && (
         <div className="fixed top-[60px] left-0 bg-white">
           <SideMenu activeMenu={activeMenu} setOpenSideMenu={setOpenSideMenu} />

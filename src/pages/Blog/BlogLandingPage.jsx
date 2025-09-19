@@ -58,7 +58,7 @@ const BlogLandingPage = () => {
 
   // Navigate single article
   const handleClick = (post) => {
-    navigate(`/${post.slug}`);
+    navigate(`/story/${post.slug}`);
   };
 
   return (

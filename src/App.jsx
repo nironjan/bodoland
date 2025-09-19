@@ -26,7 +26,7 @@ const App = () => {
           <Routes>
             {/* Default Route */}
             <Route path="/" element={<BlogLandingPage />} />
-            <Route path="/:slug" element={<BlogPostView />} />
+            <Route path="story/:slug" element={<BlogPostView />} />
             <Route path="/tag/:tagName" element={<PostByTags />} />
             <Route path="/search" element={<SearchPosts />} />
 

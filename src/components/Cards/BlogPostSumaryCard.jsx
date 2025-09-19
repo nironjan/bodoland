@@ -18,16 +18,22 @@ const BlogPostSumaryCard = ({
     >
       <img src={imgUrl} alt={title} className="w-16 h-16 rounded-lg" />
       <div className="flex-1">
+        {/* Title */}
         <h3 className="text-[13px] md:text-[15px] text-black font-medium">
           {title}{" "}
         </h3>
-        <div className="flex items-center gap-2.5 mt-2 flex-wrap">
+
+        {/* Meta */}
+        <div className="flex items-center gap-2 mt-2 flex-wrap">
           <div className="text-[11px] text-gray-700 font-medium bg-gray-100 px-2.5 py-1 rounded">
             Updated: {updatedOn}
           </div>
-          <div className="h-6 w-[1px] bg-gray-300/70" />
 
-          <div className="flex items-center gap-2">
+          {/* Divider */}
+          <div className="hidden md:block h-6 w-[1px] bg-gray-300/70" />
+
+          {/* Stats */}
+          <div className="flex flex-wrap items-center gap-2">
             <span className="flex items-center gap-1.5 text-xs text-sky-700 font-medium bg-sky-50 px-2.5 py-1 rounded">
               <LuEye className="text-[16px] text-sky-500" /> {views}
             </span>
@@ -35,13 +41,16 @@ const BlogPostSumaryCard = ({
               <LuHeart className="text-[16px] text-sky-500" /> {likes}
             </span>
           </div>
-          <div className="h-6 w-[1px] bg-gray-300/70" />
 
-          <div className="flex items-center gap-2.5">
+          {/* Divider */}
+          <div className="hidden md:block h-6 w-[1px] bg-gray-300/70" />
+
+          {/* Tags */}
+          <div className="flex flex-wrap items-center gap-1">
             {tags.map((tag, index) => (
               <div
                 key={`tag_${index}`}
-                className="text-xs text-cyan-700 font-medium bg-cyan-100/50 px-2.5 py-1 rounded"
+                className="text-xs text-cyan-700 font-medium bg-cyan-100/50 px-2 py-1 rounded"
               >
                 {tag}
               </div>

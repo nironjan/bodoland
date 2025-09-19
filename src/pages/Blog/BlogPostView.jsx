@@ -11,6 +11,7 @@ import TrendingPostSection from "./components/TrendingPostSection";
 import MarkdownContent from "./components/MarkdownContent";
 import SharePost from "./components/SharePost";
 import { sanitizeMarkdown } from "../../utils/helper";
+import BlogPostViewSkeleton from "../../components/Loader/BlogPostViewSkeleton";
 
 const BlogPostView = () => {
   const { slug } = useParams();
@@ -99,7 +100,9 @@ const BlogPostView = () => {
 
   return (
     <BlogLayout>
-      {blogPostData && (
+      {isLoading ? (
+        <BlogPostViewSkeleton />
+      ) : blogPostData ? (
         <>
           <title>{blogPostData.title}</title>
           <meta name="description" content={blogPostData.title} />
@@ -181,7 +184,9 @@ const BlogPostView = () => {
             </div>
           </div>
         </>
-      )}
+      ) : errorMsg ? (
+        <div className="text-center py-10 text-red-500">{errorMsg}</div>
+      ) : null}
     </BlogLayout>
   );
 };

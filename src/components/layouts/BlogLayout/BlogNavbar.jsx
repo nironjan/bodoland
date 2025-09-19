@@ -35,7 +35,7 @@ const BlogNavbar = ({ activeMenu }) => {
             </button>
             <Link to="/" className="flex items-center">
               <img src={Logo} alt="logo" className="h-[34px] md:h-[26px]" />
-              <span className="hidden md:block md:text-lg leading-3.5 mt-2 font-semibold">
+              <span className="logo-font text-orange-500 hidden md:block md:text-xl leading-3.5 mt-1 font-semibold">
                 The Bodoland
               </span>
             </Link>

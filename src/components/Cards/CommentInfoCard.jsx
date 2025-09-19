@@ -77,11 +77,11 @@ const CommentInfoCard = ({
 
               <p className="text-sm text-black font-medium">{content}</p>
 
-              <div className="flex items-center gap-3 mt-1.5">
+              <div className="flex items-center gap-1 mt-1.5">
                 {!isSubReply && (
                   <>
                     <button
-                      className="flex items-center gap-2 text-[13px] font-medium fext-sky-950 bg-sky-50 px-4 py-0.5 rounded-full hover:bg-sky-500 hover:text-white cursor-pointer "
+                      className="flex items-center gap-2 text-xs md:text-[13px] font-medium fext-sky-950 bg-sky-50 px-4 py-0.5 rounded-full hover:bg-sky-500 hover:text-white cursor-pointer "
                       onClick={() =>
                         setShowReplyForm((prevState) => !prevState)
                       }
@@ -89,7 +89,7 @@ const CommentInfoCard = ({
                       <LuReply /> Reply
                     </button>
                     <button
-                      className="flex items-center gap-2 text-[13px] font-medium text-sky-950 bg-sky-50 px-4 py-0.5 rounded-full hover:bg-sky-500 hover:text-white cursor-pointer"
+                      className="flex items-center gap-2 text-xs md:text-[13px] font-medium text-sky-950 bg-sky-50 px-4 py-0.5 rounded-full hover:bg-sky-500 hover:text-white cursor-pointer"
                       onClick={() =>
                         setShowSubReplies((prevState) => !prevState)
                       }
@@ -102,9 +102,8 @@ const CommentInfoCard = ({
                     </button>{" "}
                   </>
                 )}
-                ,
                 <button
-                  className="flex items-center gap-1.5 text-[13px] font-medium text-sky-950 bg-sky-50 px-4 py-0.5 rounded-full hover:bg-rose-500 hover:text-white cursor-pointer transition-all "
+                  className="flex items-center gap-1.5 text-xs md:text-[13px] font-medium text-sky-950 bg-sky-50 px-4 py-0.5 rounded-full hover:bg-rose-500 hover:text-white cursor-pointer transition-all "
                   onClick={() => onDelete()}
                 >
                   <LuTrash2 /> Delete
