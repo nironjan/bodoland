@@ -19,7 +19,7 @@ import Modal from "../../components/Modal";
 import GenerateBlogPostForm from "./components/GenerateBlogPostForm";
 import toast from "react-hot-toast";
 import { getToastMessageByType } from "../../utils/helper";
-import DeleteAlertContent from "../../components/deleteAlertContent";
+import DeleteAlertContent from "../../components/DeleteAlertContent";
 
 const BlogPostEditor = ({ isEdit }) => {
   const navigate = useNavigate();

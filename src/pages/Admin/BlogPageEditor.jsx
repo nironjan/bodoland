@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import { getToastMessageByType } from "../../utils/helper";
 import CoverImageSelector from "../../components/Inputs/CoverImageSelector";
 import Modal from "../../components/Modal";
-import DeleteAlertContent from "../../components/deleteAlertContent";
+import DeleteAlertContent from "../../components/DeleteAlertContent";
 
 const BlogPageEditor = ({ isEdit }) => {
   const navigate = useNavigate();
