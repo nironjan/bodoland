@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import MDEditor, { commands } from "@uiw/react-md-editor";
-import {
-  LuLoaderCircle,
-  LuSave,
-  LuSend,
-  LuSparkles,
-  LuTrash2,
-} from "react-icons/lu";
+import { LuLoaderCircle, LuSave, LuSend, LuTrash2 } from "react-icons/lu";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";

@@ -6,10 +6,10 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import moment from "moment";
 import Modal from "../../components/Modal";
-import DeleteAlertContent from "../../components/DeleteAlertContent";
 import toast from "react-hot-toast";
+import DeleteAlertContent from "../../components/DeleteAlertContent";
 import debounce from "lodash.debounce";
-import UserSummaryCard from "../../components/Cards/userSummaryCard";
+import UserSummaryCard from "../../components/Cards/UserSummaryCard";
 
 const Users = () => {
   const navigate = useNavigate();
