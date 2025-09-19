@@ -74,7 +74,7 @@ const BlogLandingPage = () => {
                 <FeaturedBlogPost
                   title={blogPostList[0].title}
                   coverImageUrl={blogPostList[0].coverImageUrl}
-                  description={blogPostList[0].content}
+                  description={blogPostList[0].description}
                   tags={blogPostList[0].tags}
                   updatedOn={
                     blogPostList[0].updatedAt
@@ -101,7 +101,7 @@ const BlogLandingPage = () => {
                         key={item._id}
                         title={item.title}
                         coverImageUrl={item.coverImageUrl}
-                        description={item.content}
+                        description={item.description}
                         tags={item.tags}
                         updatedOn={
                           item.updatedAt

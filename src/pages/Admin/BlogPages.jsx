@@ -9,8 +9,8 @@ import Tabs from "../../components/Tabs";
 import moment from "moment";
 import BlogPageSummaryCard from "../../components/Cards/BlogPageSummaryCard";
 import Modal from "../../components/Modal";
-import DeleteAlertContent from "../../components/deleteAlertContent";
 import debounce from "lodash.debounce";
+import DeleteAlertContent from "../../components/DeleteAlertContent";
 
 const BlogPages = () => {
   const navigate = useNavigate();
@@ -96,6 +96,13 @@ const BlogPages = () => {
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     DebouncedSearch(e.target.value);
+  };
+
+  // Load more posts
+  const handleLoadMore = () => {
+    if (page < totalPages) {
+      getAllPages(page + 1);
+    }
   };
 
   // delete page

@@ -158,6 +158,11 @@ const BlogPostView = () => {
                   className="w-full h-56 sm:h-72 md:h-80 lg:h-96 object-cover rounded-lg mb-6"
                 />
 
+                {/* Description */}
+                <div className="mt-8 text-base text-gray-500 font-medium">
+                  {blogPostData?.description}
+                </div>
+
                 {/* Markdown content */}
                 <MarkdownContent
                   content={sanitizeMarkdown(blogPostData?.content || "")}

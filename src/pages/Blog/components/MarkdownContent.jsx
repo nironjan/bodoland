@@ -11,7 +11,7 @@ const MarkdownContent = ({ content }) => {
 
   return (
     <div
-      className="text-[14px] prose prose-slate dark:prose-invert max-w-none"
+      className="mt-4 text-[16px] prose prose-slate dark:prose-invert max-w-none"
       dangerouslySetInnerHTML={{ __html: safeHtml }}
     />
   );

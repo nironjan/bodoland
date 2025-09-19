@@ -6,9 +6,10 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import moment from "moment";
 import Modal from "../../components/Modal";
-import DeleteAlertContent from "../../components/deleteAlertContent";
+import DeleteAlertContent from "../../components/DeleteAlertContent";
 import toast from "react-hot-toast";
 import debounce from "lodash.debounce";
+import UserSummaryCard from "../../components/Cards/userSummaryCard";
 
 const Users = () => {
   const navigate = useNavigate();
@@ -133,37 +134,20 @@ const Users = () => {
 
         <div className="mt-5">
           {users.map((user) => (
-            <div
+            <UserSummaryCard
               key={user._id}
-              className="flex items-center justify-between bg-white border rounded-lg p-3 mb-3 shadow-sm hover:shadow-md transition"
-            >
-              <div
-                className="flex items-center gap-3 cursor-pointer"
-                onClick={() => navigate(`/admin/users/edit/${user._id}`)}
-              >
-                <img
-                  src={user.profileImageUrl || ""}
-                  alt={user.name}
-                  className="h-12 w-12 rounded-full object-cover"
-                />
-                <div>
-                  <h4 className="font-medium">{user.name}</h4>
-                  <p className="text-sm text-gray-500">{user.email}</p>
-                  <p className="text-xs text-gray-400">
-                    {moment(user.updatedAt).format("Do MMM YYYY")}
-                  </p>
-                </div>
-              </div>
-
-              <button
-                className="text-red-500 text-sm font-medium hover:underline"
-                onClick={() =>
-                  setOpenDeleteAlert({ open: true, data: user._id })
-                }
-              >
-                Delete
-              </button>
-            </div>
+              title={user.name}
+              imgUrl={user.profileImageUrl || ""}
+              onClick={() => navigate(`/admin/users/edit/${user._id}`)}
+              updatedOn={
+                user.updatedAt
+                  ? moment(user.updatedAt).format("Do MMM YYYY")
+                  : "-"
+              }
+              onDelete={() =>
+                setOpenDeleteAlert({ open: true, data: user._id })
+              }
+            />
           ))}
 
           {!isSearching && page < totalPages && (

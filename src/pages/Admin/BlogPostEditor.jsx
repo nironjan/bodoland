@@ -28,6 +28,7 @@ const BlogPostEditor = ({ isEdit }) => {
   const [postData, setPostData] = useState({
     id: "",
     title: "",
+    description: "",
     content: "",
     coverImageUrl: "",
     coverImageFileId: "",
@@ -122,6 +123,7 @@ const BlogPostEditor = ({ isEdit }) => {
 
       const reqPayload = {
         title: postData.title,
+        description: postData.description,
         content: postData.content,
         coverImageUrl,
         coverImageFileId,
@@ -167,6 +169,7 @@ const BlogPostEditor = ({ isEdit }) => {
           ...prevState,
           id: data._id,
           title: data.title,
+          description: data.description,
           content: data.content,
           coverPreview: data.coverImageUrl || "",
           coverImageFileId: data.coverImageFileId || "",
@@ -256,7 +259,7 @@ const BlogPostEditor = ({ isEdit }) => {
 
             <div className="mt-4">
               <label className="text-sm font-medium text-slate-600">
-                Post Title
+                Story Title
               </label>
 
               <input
@@ -280,6 +283,22 @@ const BlogPostEditor = ({ isEdit }) => {
                   handleValueChange("coverImageFileId", fileId)
                 }
               />
+            </div>
+
+            <div className="mt-4">
+              <label className="text-sm font-medium text-slate-600">
+                Description
+              </label>
+
+              <textarea
+                placeholder="Write Something..."
+                className="form-textarea"
+                rows="4"
+                value={postData.description}
+                onChange={({ target }) =>
+                  handleValueChange("description", target.value)
+                }
+              ></textarea>
             </div>
 
             <div className="mt-3">

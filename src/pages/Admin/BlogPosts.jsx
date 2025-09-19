@@ -12,7 +12,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import moment from "moment";
 import BlogPostSumaryCard from "../../components/Cards/BlogPostSumaryCard";
-import DeleteAlertContent from "../../components/deleteAlertContent";
+import DeleteAlertContent from "../../components/DeleteAlertContent";
 import Modal from "../../components/Modal";
 import toast from "react-hot-toast";
 import debounce from "lodash.debounce";
