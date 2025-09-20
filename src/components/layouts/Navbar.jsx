@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
+import { useSiteSetting } from "../../context/SiteSettingContext";
 
 import SideMenu from "./SideMenu";
 import { Link } from "react-router-dom";
@@ -7,6 +8,7 @@ import ImageKit from "../ImageKit";
 
 const Navbar = ({ activeMenu }) => {
   const [openSideMenu, setOpenSideMenu] = useState(false);
+  const { siteSetting } = useSiteSetting();
 
   return (
     <div className="flex gap-5 bg-white border border-b border-gray-200/50 backdrop-blur-[2px] py-4 px-7 sticky top-0 z-30 ">
@@ -24,7 +26,7 @@ const Navbar = ({ activeMenu }) => {
       </button>
       <Link to="/" className="flex items-center">
         <ImageKit
-          src="https://ik.imagekit.io/thebodoland/site/logo"
+          src={siteSetting?.logoImageUrl || ""}
           alt="logo"
           className="h-[34px] md:h-[26px]"
         />

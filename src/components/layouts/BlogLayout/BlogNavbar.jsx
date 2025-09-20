@@ -11,11 +11,14 @@ import Login from "../../Auth/Login";
 import SignUp from "../../Auth/SignUp";
 import Modal from "../../Modal";
 import ImageKit from "../../ImageKit";
+import { useSiteSetting } from "../../../context/SiteSettingContext";
 
 const BlogNavbar = ({ activeMenu }) => {
   const { user, setOpenAuthForm } = useContext(UserContext);
   const [openSideMenu, setOpenSideMenu] = useState(false);
   const [openSearchBar, setOpenSearchBar] = useState(false);
+
+  const { siteSetting } = useSiteSetting();
 
   return (
     <>
@@ -36,7 +39,7 @@ const BlogNavbar = ({ activeMenu }) => {
             </button>
             <Link to="/" className="flex items-center">
               <ImageKit
-                src="https://ik.imagekit.io/thebodoland/site/logo"
+                src={siteSetting?.logoImageUrl || ""}
                 alt="logo"
                 className="h-[34px] md:h-[26px]"
                 h={43}

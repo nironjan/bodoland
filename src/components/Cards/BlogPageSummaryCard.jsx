@@ -1,5 +1,6 @@
 import React from "react";
 import { LuEye, LuHeart, LuTrash2 } from "react-icons/lu";
+import ImageKit from "../../components/ImageKit";
 
 const BlogPageSummaryCard = ({
   title,
@@ -14,10 +15,12 @@ const BlogPageSummaryCard = ({
       onClick={onClick}
     >
       {imgUrl ? (
-        <img
+        <ImageKit
           src={imgUrl}
           alt={title}
           className="w-16 h-16 rounded-lg object-cover"
+          w={64}
+          h={64}
         />
       ) : (
         <div className="w-16 h-16 rounded-lg bg-gray-200 flex items-center justify-center text-gray-500 text-sm">

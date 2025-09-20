@@ -4,6 +4,7 @@ import { Route, useNavigate } from "react-router-dom";
 import { BLOG_NAVBAR_DATA, SIDE_MENU_DATA } from "../../utils/data";
 import CharAvatar from "../Cards/CharAvatar";
 import { UserContext } from "../../context/userContext";
+import ImageKit from "../ImageKit";
 
 const SideMenu = ({ activeMenu, isBlogMenu, setOpenSideMenu }) => {
   const { user, setUser } = useContext(UserContext);
@@ -28,10 +29,12 @@ const SideMenu = ({ activeMenu, isBlogMenu, setOpenSideMenu }) => {
       {user && (
         <div className="flex flex-col items-center justify-center gap-1 mt-3 mb-7">
           {user?.profileImageUrl ? (
-            <img
+            <ImageKit
               src={user?.profileImageUrl || ""}
               alt="Profile Image"
               className="w-16 h-16 bg-slate-400 rounded-full"
+              w={64}
+              h={64}
             />
           ) : (
             <CharAvatar

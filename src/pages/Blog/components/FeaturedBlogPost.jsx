@@ -47,10 +47,12 @@ const FeaturedBlogPost = ({
           </div>
 
           <div className="flex items-center">
-            <img
+            <ImageKit
               src={authorProfileImg}
               alt={authorName}
               className="w-6 h-6 rounded-full mr-2"
+              w={24}
+              h={24}
             />
 
             <div>

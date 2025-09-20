@@ -8,6 +8,7 @@ import {
   LuLandmark,
   LuBriefcase,
   LuTrophy,
+  LuSettings,
   LuGraduationCap,
 } from "react-icons/lu";
 
@@ -41,6 +42,12 @@ export const SIDE_MENU_DATA = [
     label: "Users",
     icon: LuUsers,
     path: "/admin/users",
+  },
+  {
+    id: "06",
+    label: "Settings",
+    icon: LuSettings,
+    path: "/admin/settings",
   },
 ];
 

@@ -10,9 +10,11 @@ import BlogPostSummaryCard from "../../components/Cards/BlogPostSummaryCard";
 import TrendingPostSection from "./components/TrendingPostSection";
 import FeaturedPostSkeleton from "../../components/Loader/FeaturedPostSkeleton";
 import BlogCardSkeleton from "../../components/Loader/BlogCardSkeleton";
+import { useSiteSetting } from "../../context/SiteSettingContext";
 
 const BlogLandingPage = () => {
   const navigate = useNavigate();
+  const { siteSetting } = useSiteSetting();
 
   const [blogPostList, setBlogPostList] = useState([]);
   const [page, setPage] = useState(1);
@@ -63,6 +65,10 @@ const BlogLandingPage = () => {
 
   return (
     <BlogLayout>
+      <title>{siteSetting?.siteTitle || "Home Page"}</title>
+      <meta name="description" content={siteSetting?.description || ""} />
+      <meta name="og:title" content={siteSetting?.siteTitle || ""} />
+
       <div className="max-w-6xl mx-auto px-5 md:px-8">
         <div className="grid grid-cols-12 gap-5">
           <div className="col-span-12 md:col-span-9">

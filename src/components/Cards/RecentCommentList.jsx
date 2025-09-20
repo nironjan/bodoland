@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { LuDot } from "react-icons/lu";
+import ImageKit from "../../components/ImageKit";
 
 const RecentCommentList = ({ comments }) => {
   return (
@@ -11,10 +12,12 @@ const RecentCommentList = ({ comments }) => {
             key={comment._id}
             className="flex gap-4 border-b border-gray-100 pb-4 last:border-none"
           >
-            <img
+            <ImageKit
               src={comment.author?.profileImageUrl}
               alt={comment.author?.name}
               className="w-10 h-10 rounded-full object-cover"
+              w={40}
+              h={40}
             />
             <div className="flex-1">
               <div className="flex items-start justify-between">

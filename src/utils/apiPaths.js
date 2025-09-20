@@ -52,4 +52,9 @@ export const API_PATHS = {
     GET_ALL_BY_POST: (postId) => `/api/comments/${postId}`,
     DELETE: (commentId) => `/api/comments/${commentId}`,
   },
+  SETTINGS: {
+    CREATE: "/api/setting",
+    UPDATE: "/api/setting",
+    GET: "/api/setting",
+  },
 };

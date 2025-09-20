@@ -1,5 +1,6 @@
 import React from "react";
 import { LuHeart } from "react-icons/lu";
+import ImageKit from "../../components/ImageKit";
 
 const TopPostCard = ({ title, coverImageUrl, views, likes, maxViews }) => {
   const safeViews = Number(views) || 0;
@@ -9,10 +10,12 @@ const TopPostCard = ({ title, coverImageUrl, views, likes, maxViews }) => {
   return (
     <div className="bg-white py-4 flex flex-col gap-3 border-b border-gray-100">
       <div className="flex items-start gap-2">
-        <img
+        <ImageKit
           src={coverImageUrl}
           alt={title}
           className="w-10 h-10 rounded-md object-cover"
+          w={40}
+          h={40}
         />
         <h3 className="text-sm font-medium text-gray-800 line-clamp-2">
           {title}
