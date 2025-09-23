@@ -30,8 +30,8 @@ const App = () => {
             <Routes>
               {/* Default Route */}
               <Route path="/" element={<BlogLandingPage />} />
-              <Route path="story/:slug" element={<BlogPostView />} />
-              <Route path="/tag/:tagName" element={<PostByTags />} />
+              <Route path="/story/:slug" element={<BlogPostView />} />
+              <Route path="/story/tag/:tagName" element={<PostByTags />} />
               <Route path="/search" element={<SearchPosts />} />
 
               {/* Admin Routes */}

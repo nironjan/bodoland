@@ -36,13 +36,10 @@ const CommentInfoCard = ({
   const handleAddReply = async () => {
     try {
       console.log("post", post);
-      const response = await axiosInstance.post(
-        API_PATHS.COMMENTS.ADD(post._id),
-        {
-          content: replyText,
-          parentComment: commentId,
-        }
-      );
+      await axiosInstance.post(API_PATHS.COMMENTS.ADD(post._id), {
+        content: replyText,
+        parentComment: commentId,
+      });
       toast.success("Reply added successfully.");
       setReplyText("");
       setShowReplyForm(false);

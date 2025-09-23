@@ -37,7 +37,7 @@ const BlogPostSummaryCard = ({
               className="bg-sky-200/50 text-sky-800/80 text-xs font-medium px-3 py-0.5 rounded-full text-nowrap cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation();
-                navigate(`/tag/${tag}`);
+                navigate(`/story/tag/${tag}`);
               }}
             >
               # {tag}

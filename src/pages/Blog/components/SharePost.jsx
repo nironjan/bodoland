@@ -24,7 +24,7 @@ const SharePost = ({ title }) => {
   };
   return (
     <div className="my-6">
-      <p className="text-gray-600 font-medium mb-3">Share Story</p>
+      <p className="text-gray-600 font-medium mb-3">Share Story:</p>
 
       <div className="flex items-center gap-4">
         <FacebookShareButton url={shareUrl} quote={title}>

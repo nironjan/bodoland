@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import BlogLayout from "../../components/layouts/BlogLayout/BlogLayout";
 import { LuCircleAlert, LuDot, LuSparkles } from "react-icons/lu";
-import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import axiosInstance from "../../utils/axiosInstance";
@@ -13,6 +12,9 @@ import SharePost from "./components/SharePost";
 import { sanitizeMarkdown } from "../../utils/helper";
 import BlogPostViewSkeleton from "../../components/Loader/BlogPostViewSkeleton";
 import ImageKit from "../../components/ImageKit";
+import CommentReplyInput from "../../components/Inputs/CommentReplyInput";
+import CommentInfoCard from "../Blog/components/CommentInfoCard";
+import toast from "react-hot-toast";
 
 const BlogPostView = () => {
   const { slug } = useParams();
@@ -26,11 +28,16 @@ const BlogPostView = () => {
   const [replyText, setReplyText] = useState("");
   const [showReplyForm, setShowReplyForm] = useState(false);
 
-  const [openSummarizeDrawer, setSummarizeDrawer] = useState(false);
-  const [summaryContent, setSummaryContent] = useState("");
+  // const [openSummarizeDrawer, setSummarizeDrawer] = useState(false);
+  // const [summaryContent, setSummaryContent] = useState("");
+
+  const [setOpenDeleteAlert] = useState({
+    open: false,
+    data: null,
+  });
 
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg] = useState("");
 
   // Get Post Data By slug
   const fetchPostDetailsBySlug = async () => {
@@ -77,9 +84,7 @@ const BlogPostView = () => {
     if (!postId) return;
 
     try {
-      const response = await axiosInstance.post(
-        API_PATHS.POSTS.INCREMENT_VIEW(postId)
-      );
+      await axiosInstance.post(API_PATHS.POSTS.INCREMENT_VIEW(postId));
     } catch (error) {
       console.error("Error:", error);
     }
@@ -92,7 +97,21 @@ const BlogPostView = () => {
   };
 
   // Add reply
-  const handleAddReply = async () => {};
+  const handleAddReply = async () => {
+    try {
+      await axiosInstance.post(API_PATHS.COMMENTS.ADD(blogPostData._id), {
+        content: replyText,
+        parComment: "",
+      });
+      toast.success("Reply added successfully");
+
+      setReplyText("");
+      setShowReplyForm(false);
+      fetchCommentByPostId(blogPostData._id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     fetchPostDetailsBySlug();
@@ -111,7 +130,7 @@ const BlogPostView = () => {
           <meta name="og:image" content={blogPostData.coverImageUrl} />
           <meta property="og:type" content="article" />
 
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-0">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
               {/* Main Content */}
               <div className="lg:col-span-8">
@@ -136,7 +155,7 @@ const BlogPostView = () => {
                         className="bg-sky-200/50 text-sky-800/80 text-xs font-medium px-3 py-1 rounded-full whitespace-nowrap cursor-pointer"
                         onClick={(e) => {
                           e.stopPropagation();
-                          navigate(`/tag/${tag}`);
+                          navigate(`/story/tag/${tag}`);
                         }}
                       >
                         # {tag}
@@ -177,6 +196,67 @@ const BlogPostView = () => {
                 {/* Share section */}
                 <div className="mt-8">
                   <SharePost title={blogPostData.title} />
+                </div>
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="text-lg font-semibold">Comments</h4>
+
+                    <button
+                      className="flex items-center justify-center gap-3 bg-linear-to-r from-sky-500 to-cyan-400 text-xs font-semibold text-white px-5 py-2 rounded-full hover:bg-black hover:text-white cursor-pointer"
+                      onClick={() => {
+                        if (!user) {
+                          setOpenAuthForm(true);
+                          return;
+                        }
+                        setShowReplyForm(true);
+                      }}
+                    >
+                      Add Comment
+                    </button>
+                  </div>
+
+                  {showReplyForm && (
+                    <div className="bg-white pt-1 pb-5 pr-8 rounded-lg mb-8">
+                      <CommentReplyInput
+                        user={user}
+                        autorName={user.name}
+                        content={""}
+                        replyText={replyText}
+                        setReplyText={setReplyText}
+                        handleAddReply={handleAddReply}
+                        handleCancelReply={handleCancelReply}
+                        disableAutoGen
+                        type="new"
+                      />
+                    </div>
+                  )}
+
+                  {comments?.length > 0 &&
+                    comments.map((comment) => (
+                      <CommentInfoCard
+                        key={comment._id}
+                        commentId={comment._id || null}
+                        authorName={comment.author.name}
+                        authorPhoto={comment.author.profileImageUrl}
+                        content={comment.content}
+                        updatedOn={
+                          comment.updatedAt
+                            ? moment(comment.updatedAt).format("Do MMM YYYY")
+                            : "-"
+                        }
+                        post={comment.post}
+                        replies={comment.replies || []}
+                        getAllComments={() =>
+                          fetchCommentByPostId(blogPostData._id)
+                        }
+                        onDelete={(commentId) =>
+                          setOpenDeleteAlert({
+                            open: true,
+                            data: commentId || comment._id,
+                          })
+                        }
+                      />
+                    ))}
                 </div>
               </div>
 

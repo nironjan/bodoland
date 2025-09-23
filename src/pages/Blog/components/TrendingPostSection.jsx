@@ -28,7 +28,7 @@ const TrendingPostSection = () => {
 
   // Handle post click
   const handleClick = (post) => {
-    navigate(`/${post.slug}`);
+    navigate(`/story/${post.slug}`);
   };
 
   useEffect(() => {

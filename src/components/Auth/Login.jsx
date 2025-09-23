@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { API_PATHS } from "../../utils/apiPaths";
 import { UserContext } from "../../context/userContext";
 
@@ -14,7 +14,7 @@ const Login = ({ setCurrentPage }) => {
   const [error, setError] = useState(null);
 
   const { updateUser, setOpenAuthForm } = useContext(UserContext);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // handle Login Form Submit
   const handleLogin = async (e) => {
@@ -39,19 +39,23 @@ const Login = ({ setCurrentPage }) => {
         password,
       });
 
-      const { token, role } = response.data;
+      // const { token, role } = response.data;
+      const { token } = response.data;
 
       if (token) {
         localStorage.setItem("token", token);
         updateUser(response.data);
 
-        // Redirect based on role
-        if (role === "admin") {
-          setOpenAuthForm(false);
-          return navigate("/admin/dashboard");
-        }
+        // Close the modal
         setOpenAuthForm(false);
-        return navigate("/");
+
+        // If You want Redirect based on role active this
+        // if (role === "admin") {
+        //   setOpenAuthForm(false);
+        //   return navigate("/admin/dashboard");
+        // }
+        // setOpenAuthForm(false);
+        // return navigate("/");
       }
     } catch (error) {
       if (error.response && error.response.data.message) {

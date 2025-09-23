@@ -69,7 +69,7 @@ const BlogLandingPage = () => {
       <meta name="description" content={siteSetting?.description || ""} />
       <meta name="og:title" content={siteSetting?.siteTitle || ""} />
 
-      <div className="max-w-6xl mx-auto px-5 md:px-8">
+      <div className="max-w-6xl mx-auto px-5 md:px-0">
         <div className="grid grid-cols-12 gap-5">
           <div className="col-span-12 md:col-span-9">
             {/* Featured Post */}
