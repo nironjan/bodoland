@@ -15,6 +15,7 @@ import ImageKit from "../../components/ImageKit";
 import CommentReplyInput from "../../components/Inputs/CommentReplyInput";
 import CommentInfoCard from "../Blog/components/CommentInfoCard";
 import toast from "react-hot-toast";
+import LikeCommentButton from "./components/LikeCommentButton";
 
 const BlogPostView = () => {
   const { slug } = useParams();
@@ -75,9 +76,6 @@ const BlogPostView = () => {
       console.error("Error:", error);
     }
   };
-
-  // Generate Blog post Summary
-  const generateBlogPostSumary = async () => {};
 
   // Increment View
   const incrementViews = async (postId) => {
@@ -141,6 +139,21 @@ const BlogPostView = () => {
 
                 {/* Meta info */}
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-3 mb-5">
+                  <div className="flex items-center gap-1.5">
+                    <ImageKit
+                      src={blogPostData.author.profileImageUrl}
+                      alt={blogPostData.author.name}
+                      className="w-6 h-6 rounded-full"
+                      w={24}
+                      h={24}
+                    />
+                    <span className="text-sm text-gray-500 font-medium">
+                      {blogPostData.author.name}
+                    </span>
+                  </div>
+
+                  <LuDot className="text-xl text-gray-400 hidden sm:block" />
+
                   <span className="text-sm text-gray-500 font-medium">
                     {moment(blogPostData.updatedAt || "").format("Do MMM YYYY")}
                   </span>
@@ -162,16 +175,6 @@ const BlogPostView = () => {
                       </button>
                     ))}
                   </div>
-
-                  <LuDot className="text-xl text-gray-400 hidden sm:block" />
-
-                  {/* Summarize button */}
-                  <button
-                    className="flex items-center gap-2 bg-gradient-to-r from-sky-500 to-cyan-400 text-xs text-white font-medium px-3 py-1 rounded-full whitespace-nowrap cursor-pointer hover:scale-105 transition-transform"
-                    onClick={generateBlogPostSumary}
-                  >
-                    <LuSparkles /> Summarize
-                  </button>
                 </div>
 
                 {/* Cover image */}
@@ -231,35 +234,42 @@ const BlogPostView = () => {
                     </div>
                   )}
 
-                  {comments?.length > 0 &&
-                    comments.map((comment) => (
-                      <CommentInfoCard
-                        key={comment._id}
-                        commentId={comment._id || null}
-                        authorName={comment.author.name}
-                        authorPhoto={comment.author.profileImageUrl}
-                        content={comment.content}
-                        updatedOn={
-                          comment.updatedAt
-                            ? moment(comment.updatedAt).format("Do MMM YYYY")
-                            : "-"
-                        }
-                        post={comment.post}
-                        replies={comment.replies || []}
-                        getAllComments={() =>
-                          fetchCommentByPostId(blogPostData._id)
-                        }
-                        onDelete={(commentId) =>
-                          setOpenDeleteAlert({
-                            open: true,
-                            data: commentId || comment._id,
-                          })
-                        }
-                      />
-                    ))}
+                  <div id="comment-section" className="scroll-mt-36">
+                    {comments?.length > 0 &&
+                      comments.map((comment) => (
+                        <CommentInfoCard
+                          key={comment._id}
+                          commentId={comment._id || null}
+                          authorName={comment.author.name}
+                          authorPhoto={comment.author.profileImageUrl}
+                          content={comment.content}
+                          updatedOn={
+                            comment.updatedAt
+                              ? moment(comment.updatedAt).format("Do MMM YYYY")
+                              : "-"
+                          }
+                          post={comment.post}
+                          replies={comment.replies || []}
+                          getAllComments={() =>
+                            fetchCommentByPostId(blogPostData._id)
+                          }
+                          onDelete={(commentId) =>
+                            setOpenDeleteAlert({
+                              open: true,
+                              data: commentId || comment._id,
+                            })
+                          }
+                        />
+                      ))}
+                  </div>
                 </div>
               </div>
 
+              <LikeCommentButton
+                postId={blogPostData._id || ""}
+                likes={blogPostData.likes || 0}
+                comments={comments?.length || 0}
+              />
               {/* Sidebar */}
               <div className="lg:col-span-4">
                 <TrendingPostSection />

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Logo from "../../../assets/logo.svg";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { LuSearch } from "react-icons/lu";
 import { BLOG_NAVBAR_DATA } from "../../../utils/data";
 import SideMenu from "../SideMenu";
@@ -12,6 +12,7 @@ import SignUp from "../../Auth/SignUp";
 import Modal from "../../Modal";
 import ImageKit from "../../ImageKit";
 import { useSiteSetting } from "../../../context/SiteSettingContext";
+import SearchBarPopup from "../../../pages/Blog/components/SearchBarPopup";
 
 const BlogNavbar = ({ activeMenu }) => {
   const { user, setOpenAuthForm } = useContext(UserContext);
@@ -19,6 +20,7 @@ const BlogNavbar = ({ activeMenu }) => {
   const [openSearchBar, setOpenSearchBar] = useState(false);
 
   const { siteSetting } = useSiteSetting();
+  const location = useLocation();
 
   return (
     <>
@@ -51,8 +53,12 @@ const BlogNavbar = ({ activeMenu }) => {
             </Link>
           </div>
           <nav className="hidden md:flex items-center gap-4 lg:gap-10">
-            {BLOG_NAVBAR_DATA.map((item, index) => {
-              if (item?.onlySideMenu) return;
+            {BLOG_NAVBAR_DATA.map((item) => {
+              if (item?.onlySideMenu) return null;
+
+              const isActive =
+                location.pathname === item.path ||
+                location.pathname.startsWith(item.path + "/");
 
               return (
                 <Link key={item.id} to={item.path}>
@@ -60,7 +66,7 @@ const BlogNavbar = ({ activeMenu }) => {
                     {item.label}
                     <span
                       className={`absolute inset-x-0 bottom-0 h-[2px] bg-sky-500 transition-all duration-300 origin-left ${
-                        index == 0 ? "scale-x-100" : "scale-x-0"
+                        isActive ? "scale-x-100" : "scale-x-0"
                       } group-hover:scale-x-100`}
                     ></span>
                   </li>
@@ -107,6 +113,7 @@ const BlogNavbar = ({ activeMenu }) => {
       </div>
 
       <AuthModel />
+      <SearchBarPopup isOpen={openSearchBar} setIsOpen={setOpenSearchBar} />
     </>
   );
 };
