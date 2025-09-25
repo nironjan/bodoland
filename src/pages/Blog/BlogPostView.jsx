@@ -263,13 +263,13 @@ const BlogPostView = () => {
                       ))}
                   </div>
                 </div>
+                <LikeCommentButton
+                  postId={blogPostData._id || ""}
+                  likes={blogPostData.likes || 0}
+                  comments={comments?.length || 0}
+                />
               </div>
 
-              <LikeCommentButton
-                postId={blogPostData._id || ""}
-                likes={blogPostData.likes || 0}
-                comments={comments?.length || 0}
-              />
               {/* Sidebar */}
               <div className="lg:col-span-4">
                 <TrendingPostSection />
