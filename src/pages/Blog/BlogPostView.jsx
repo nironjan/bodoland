@@ -177,6 +177,11 @@ const BlogPostView = () => {
                   </div>
                 </div>
 
+                {/* Description */}
+                <div className="my-8 text-base text-gray-500 font-medium italic">
+                  {blogPostData?.description}
+                </div>
+
                 {/* Cover image */}
                 <ImageKit
                   src={blogPostData.coverImageUrl}
@@ -185,11 +190,6 @@ const BlogPostView = () => {
                   w={1200}
                   h={675}
                 />
-
-                {/* Description */}
-                <div className="mt-8 text-base text-gray-500 font-medium">
-                  {blogPostData?.description}
-                </div>
 
                 {/* Markdown content */}
                 <MarkdownContent
