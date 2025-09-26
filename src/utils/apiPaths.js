@@ -1,5 +1,4 @@
-// export const BASE_URL = "http://localhost:8000";
-export const BASE_URL = "https://the-bodoland-backend.onrender.com";
+export const BASE_URL = import.meta.env.VITE_APP_URL;
 
 export const API_PATHS = {
   AUTH: {
@@ -56,5 +55,10 @@ export const API_PATHS = {
     CREATE: "/api/setting",
     UPDATE: "/api/setting",
     GET: "/api/setting",
+  },
+  SITEMAP: {
+    POSTS: "/api/sitemap.xml",
+    TAGS: "/api/sitemap-tags",
+    INDEX: "/api/sitemap-index",
   },
 };

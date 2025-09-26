@@ -20,6 +20,7 @@ import SettingEditor from "./pages/Admin/SettingEditor";
 
 import UserProvider from "./context/userContext";
 import { SiteSettingProvider } from "./context/SiteSettingContext";
+import BlogPageView from "./pages/Blog/Page/BlogPageView";
 
 const App = () => {
   return (
@@ -32,6 +33,9 @@ const App = () => {
               <Route path="/" element={<BlogLandingPage />} />
               <Route path="/story/:slug" element={<BlogPostView />} />
               <Route path="/story/tag/:tagName" element={<PostByTags />} />
+
+              <Route path="/page/:slug" element={<BlogPageView />} />
+
               <Route path="/search" element={<SearchPosts />} />
 
               {/* Admin Routes */}
