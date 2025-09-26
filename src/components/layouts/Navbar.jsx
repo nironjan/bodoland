@@ -25,17 +25,16 @@ const Navbar = ({ activeMenu }) => {
       <Link to="/" className="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="200"
-          height="60"
-          viewBox="0 0 200 60"
+          viewBox="0 0 80 60"
+          className="h-12 md:h-16"
         >
           <text
             x="0"
             y="40"
-            font-size="40"
-            font-family="Georgia, serif"
+            fontSize="40"
+            fontFamily="Georgia, serif"
             fill="#242424"
-            font-weight="bold"
+            fontWeight="bold"
           >
             tb.
           </text>
