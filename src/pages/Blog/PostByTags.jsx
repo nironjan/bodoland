@@ -6,6 +6,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import moment from "moment";
 import TrendingPostSection from "./components/TrendingPostSection";
 import BlogPostSummaryCard from "../../components/Cards/BlogPostSummaryCard";
+import Meta from "../../components/Meta";
 
 const PostByTags = () => {
   const { tagName } = useParams();
@@ -38,6 +39,19 @@ const PostByTags = () => {
 
   return (
     <BlogLayout>
+      <Meta
+        title={`Story(s) tagged with #${tagName} | The Bodoland`}
+        description={
+          blogPostList.length > 0
+            ? `Read ${blogPostList.length} latest articles tagged with #${tagName} on The Bodoland.`
+            : `Explore articles tagged with #${tagName} on The Bodoland.`
+        }
+        image={blogPostList[0]?.coverImageUrl}
+        url={`${window.location.origin}/story/tag/${tagName}`}
+        keywords={tagName + ", news, latest story"}
+        author="The Bodoland Team"
+        section="News"
+      />
       <div className="max-w-6xl mx-auto px-5 md:px-0">
         <div className="grid grid-cols-12 gap-5">
           {/* left side */}
@@ -51,7 +65,7 @@ const PostByTags = () => {
                 <p className="text-sm font-medium text-gray-700 mt-1">
                   {loading
                     ? "Loading posts..."
-                    : `Showing ${blogPostList.length} posts tagged with #${tagName}`}
+                    : `Showing ${blogPostList.length} storie(s) tagged with #${tagName}`}
                 </p>
               </div>
             </div>

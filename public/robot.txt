@@ -1,0 +1,12 @@
+# public/robots.txt
+User-agent: *
+Allow: /
+
+# sitemap
+Sitemap: https://bodoland.vercel.app/sitemap-index.xml
+
+
+
+#private route
+Disallow: /admin/
+Disallow: /api/

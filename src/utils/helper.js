@@ -54,3 +54,12 @@ export const sanitizeMarkdown = (content) => {
   // Step 3: Sanitize HTML
   return DOMPurify.sanitize(rawHtml);
 };
+
+// sanitize markdown for description meta tags
+export const htmlToText = (html) => {
+  if (!html) return "";
+
+  const tmp = document.createElement("div");
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || "";
+};

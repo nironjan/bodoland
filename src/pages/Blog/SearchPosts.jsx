@@ -5,6 +5,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import BlogPostSummaryCard from "../../components/Cards/BlogPostSummaryCard";
 import moment from "moment/moment";
+import Meta from "../../components/Meta";
 
 const SearchPosts = () => {
   const navigate = useNavigate();
@@ -40,6 +41,26 @@ const SearchPosts = () => {
 
   return (
     <BlogLayout>
+      <Meta
+        title={
+          searchResults.length > 0
+            ? `Search Results for "${query}" | The Bodoland`
+            : `No results for "{query}" | The Bodoland`
+        }
+        description={
+          searchResults.length > 0
+            ? `Found ${searchResults.length} article(s) matching "${query}" on The Bodoland. Read the latest news and stories.`
+            : `No articles found matching "${query}" on The Bodoland. Try another keyword.`
+        }
+        image={searchResults.length > 0 ? searchResults[0]?.coverImageUrl : ""}
+        url={`${window.location.origin}/search?query=${encodeURIComponent(
+          query
+        )}`}
+        keywords={`${query}, news, latest story`}
+        author="The Bodoland Team"
+        section="News"
+        noIndex={true}
+      />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-0">
         <h3 className="text-lg font-medium">
           {loading ? (

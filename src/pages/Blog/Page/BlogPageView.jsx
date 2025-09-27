@@ -5,9 +5,9 @@ import axiosInstance from "../../../utils/axiosInstance";
 import { API_PATHS } from "../../../utils/apiPaths";
 import moment from "moment";
 import MarkdownContent from "../components/MarkdownContent";
-import { sanitizeMarkdown } from "../../../utils/helper";
-import TrendingPostSection from "../../Blog/components/TrendingPostSection";
+import { htmlToText, sanitizeMarkdown } from "../../../utils/helper";
 import BlogPageContentSkeleton from "../../../components/Loader/BlogPageContentSkeleton";
+import Meta from "../../../components/Meta";
 
 const BlogPageView = () => {
   const { slug } = useParams();
@@ -53,6 +53,17 @@ const BlogPageView = () => {
           <meta name="og:title" content={blogPageData.title} />
           <meta name="og:image" content={blogPageData.coverImageUrl} />
           <meta property="og:type" content="article" />
+
+          <Meta
+            title={blogPageData.title}
+            description={htmlToText(
+              sanitizeMarkdown(blogPageData.content)
+            )?.slice(0, 150)}
+            image={blogPageData.coverImageUrl}
+            url={`${window.location.origin}/story/${blogPageData.slug}`}
+            author={blogPageData.author?.name}
+            section="News"
+          />
 
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-0">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">

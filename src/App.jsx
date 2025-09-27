@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
@@ -21,6 +20,7 @@ import SettingEditor from "./pages/Admin/SettingEditor";
 import UserProvider from "./context/userContext";
 import { SiteSettingProvider } from "./context/SiteSettingContext";
 import BlogPageView from "./pages/Blog/Page/BlogPageView";
+import AdminMetaWrapper from "./components/MetaWrapper/AdminMetaWrapper";
 
 const App = () => {
   return (
@@ -40,23 +40,94 @@ const App = () => {
 
               {/* Admin Routes */}
               <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
-                <Route path="/admin/dashboard" element={<Dashboard />} />
-                <Route path="/admin/posts" element={<BlogPosts />} />
-                <Route path="/admin/post/create" element={<BlogPostEditor />} />
-                <Route path="/admin/pages" element={<BlogPages />} />
-                <Route path="/admin/page/create" element={<BlogPageEditor />} />
+                <Route
+                  path="/admin/dashboard"
+                  element={
+                    <AdminMetaWrapper>
+                      <Dashboard />
+                    </AdminMetaWrapper>
+                  }
+                />
+                <Route
+                  path="/admin/posts"
+                  element={
+                    <AdminMetaWrapper>
+                      <BlogPosts />
+                    </AdminMetaWrapper>
+                  }
+                />
+                <Route
+                  path="/admin/post/create"
+                  element={
+                    <AdminMetaWrapper>
+                      <BlogPostEditor />
+                    </AdminMetaWrapper>
+                  }
+                />
+                <Route
+                  path="/admin/pages"
+                  element={
+                    <AdminMetaWrapper>
+                      <BlogPages />
+                    </AdminMetaWrapper>
+                  }
+                />
+                <Route
+                  path="/admin/page/create"
+                  element={
+                    <AdminMetaWrapper>
+                      <BlogPageEditor />
+                    </AdminMetaWrapper>
+                  }
+                />
                 <Route
                   path="/admin/post/edit/:postSlug"
-                  element={<BlogPostEditor isEdit={true} />}
+                  element={
+                    <AdminMetaWrapper>
+                      <BlogPostEditor isEdit={true} />
+                    </AdminMetaWrapper>
+                  }
                 />
                 <Route
                   path="/admin/page/edit/:pageSlug"
-                  element={<BlogPageEditor isEdit={true} />}
+                  element={
+                    <AdminMetaWrapper>
+                      <BlogPageEditor isEdit={true} />
+                    </AdminMetaWrapper>
+                  }
                 />
-                <Route path="/admin/comments" element={<Comments />} />
-                <Route path="/admin/users" element={<Users />} />
-                <Route path="/admin/users/edit/:id" element={<UserEditor />} />
-                <Route path="/admin/settings" element={<SettingEditor />} />
+                <Route
+                  path="/admin/comments"
+                  element={
+                    <AdminMetaWrapper>
+                      <Comments />
+                    </AdminMetaWrapper>
+                  }
+                />
+                <Route
+                  path="/admin/users"
+                  element={
+                    <AdminMetaWrapper>
+                      <Users />
+                    </AdminMetaWrapper>
+                  }
+                />
+                <Route
+                  path="/admin/users/edit/:id"
+                  element={
+                    <AdminMetaWrapper>
+                      <UserEditor />
+                    </AdminMetaWrapper>
+                  }
+                />
+                <Route
+                  path="/admin/settings"
+                  element={
+                    <AdminMetaWrapper>
+                      <SettingEditor />
+                    </AdminMetaWrapper>
+                  }
+                />
               </Route>
 
               <Route path="/admin-login" element={<AdminLogin />} />

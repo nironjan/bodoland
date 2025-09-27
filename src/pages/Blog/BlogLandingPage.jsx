@@ -11,6 +11,7 @@ import TrendingPostSection from "./components/TrendingPostSection";
 import FeaturedPostSkeleton from "../../components/Loader/FeaturedPostSkeleton";
 import BlogCardSkeleton from "../../components/Loader/BlogCardSkeleton";
 import { useSiteSetting } from "../../context/SiteSettingContext";
+import Meta from "../../components/Meta";
 
 const BlogLandingPage = () => {
   const navigate = useNavigate();
@@ -65,9 +66,12 @@ const BlogLandingPage = () => {
 
   return (
     <BlogLayout>
-      <title>{siteSetting?.siteTitle || "Home Page"}</title>
-      <meta name="description" content={siteSetting?.description || ""} />
-      <meta name="og:title" content={siteSetting?.siteTitle || ""} />
+      <Meta
+        title={siteSetting?.siteTitle}
+        description={siteSetting?.description}
+        image={siteSetting?.logoImageUrl}
+        url={`${window.location.origin}`}
+      />
 
       <div className="max-w-6xl mx-auto px-5 md:px-0">
         <div className="grid grid-cols-12 gap-5">

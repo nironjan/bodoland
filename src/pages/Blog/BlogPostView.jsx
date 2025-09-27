@@ -9,17 +9,20 @@ import moment from "moment";
 import TrendingPostSection from "./components/TrendingPostSection";
 import MarkdownContent from "./components/MarkdownContent";
 import SharePost from "./components/SharePost";
-import { sanitizeMarkdown } from "../../utils/helper";
+import { htmlToText, sanitizeMarkdown } from "../../utils/helper";
 import BlogPostViewSkeleton from "../../components/Loader/BlogPostViewSkeleton";
 import ImageKit from "../../components/ImageKit";
 import CommentReplyInput from "../../components/Inputs/CommentReplyInput";
 import CommentInfoCard from "../Blog/components/CommentInfoCard";
 import toast from "react-hot-toast";
 import LikeCommentButton from "./components/LikeCommentButton";
+import Meta from "../../components/Meta";
 
 const BlogPostView = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+
+  const BASE_URL = window.location.origin;
 
   const [blogPostData, setBlogPostData] = useState(null);
   const [comments, setComments] = useState(null);
@@ -122,11 +125,21 @@ const BlogPostView = () => {
         <BlogPostViewSkeleton />
       ) : blogPostData ? (
         <>
-          <title>{blogPostData.title}</title>
-          <meta name="description" content={blogPostData.title} />
-          <meta name="og:title" content={blogPostData.title} />
-          <meta name="og:image" content={blogPostData.coverImageUrl} />
-          <meta property="og:type" content="article" />
+          <Meta
+            title={blogPostData.title}
+            description={
+              blogPostData.description ||
+              htmlToText(sanitizeMarkdown(blogPostData.content))?.slice(0, 150)
+            }
+            image={blogPostData.coverImageUrl}
+            url={`${window.location.origin}/story/${blogPostData.slug}`}
+            keywords={blogPostData.tags?.join(", ")}
+            author={blogPostData.author?.name}
+            publishedTime={blogPostData.createdAt}
+            modifiedTime={blogPostData.updatedAt}
+            section="News"
+            tags={blogPostData.tags}
+          />
 
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-0">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
