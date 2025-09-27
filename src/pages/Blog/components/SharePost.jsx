@@ -28,11 +28,11 @@ const SharePost = ({ title }) => {
 
       <div className="flex items-center gap-4">
         <FacebookShareButton url={shareUrl} quote={title}>
-          <FacebookIcon size={32} round />
+          <FacebookIcon size={32} round aria-label="facebook" />
         </FacebookShareButton>
 
         <TwitterShareButton url={shareUrl} quote={title}>
-          <TwitterIcon size={32} round />
+          <TwitterIcon size={32} round aria-label="twitter" />
         </TwitterShareButton>
 
         <button
@@ -40,9 +40,9 @@ const SharePost = ({ title }) => {
           className="bg-white hover:bg-sky-50 text-sky-800 font-medium px-2 py-2 rounded-full cursor-pointer"
         >
           {isCopied ? (
-            <LuCheck className="text-[20px]" />
+            <LuCheck className="text-[20px]" aria-label="check" />
           ) : (
-            <LuCopy className="text-[20px]" />
+            <LuCopy className="text-[20px]" aria-label="copy" />
           )}
         </button>
       </div>

@@ -29,6 +29,7 @@ const BlogNavbar = ({ activeMenu }) => {
               onClick={() => {
                 setOpenSideMenu(!openSideMenu);
               }}
+              aria-label={openSideMenu ? "Close menu" : "Open menu"}
             >
               {openSideMenu ? (
                 <HiOutlineX className="text-[28px] cursor-pointer" />
@@ -41,6 +42,7 @@ const BlogNavbar = ({ activeMenu }) => {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 80 60"
                 className="h-12 md:h-16"
+                aria-label="logo"
               >
                 <text
                   x="0"
@@ -84,7 +86,7 @@ const BlogNavbar = ({ activeMenu }) => {
               className="hover:text-sky-500 cursor-pointer"
               onClick={() => setOpenSearchBar(true)}
             >
-              <LuSearch className="text-[22px]" />
+              <LuSearch className="text-[22px]" aria-label="Search" />
             </button>
 
             {!user ? (

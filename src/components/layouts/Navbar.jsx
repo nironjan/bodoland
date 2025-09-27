@@ -17,9 +17,12 @@ const Navbar = ({ activeMenu }) => {
         }}
       >
         {openSideMenu ? (
-          <HiOutlineX className="text-2xl cursor-pointer" />
+          <HiOutlineX
+            className="text-2xl cursor-pointer"
+            aria-label="outline"
+          />
         ) : (
-          <HiOutlineMenu className="text-2xl cursor-pointer" />
+          <HiOutlineMenu className="text-2xl cursor-pointer" aria-label="bar" />
         )}
       </button>
       <Link to="/" className="flex items-center">
