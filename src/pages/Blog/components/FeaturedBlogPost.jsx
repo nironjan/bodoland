@@ -27,7 +27,7 @@ const FeaturedBlogPost = ({
 
       {/* Content */}
       <div className="md:col-span-6 flex items-center">
-        <div className="p-6">
+        <div className="py-2 md:p-6">
           <h2 className="text-lg md:text-2xl font-bold mb-2 line-clamp-3">
             {title}
           </h2>

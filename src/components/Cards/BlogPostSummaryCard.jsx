@@ -24,7 +24,7 @@ const BlogPostSummaryCard = ({
         h={256}
       />
 
-      <div className="p-4 md:p-6">
+      <div className="py-2 md:p-6">
         <h2 className="text-base md:text-lg font-bold mb-2 line-clamp-3">
           {title}
         </h2>
