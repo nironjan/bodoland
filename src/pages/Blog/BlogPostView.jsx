@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import BlogLayout from "../../components/layouts/BlogLayout/BlogLayout";
-import { LuCircleAlert, LuDot, LuSparkles } from "react-icons/lu";
+import { LuDot } from "react-icons/lu";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import axiosInstance from "../../utils/axiosInstance";
@@ -208,7 +208,11 @@ const BlogPostView = () => {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-0">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
               {/* Main Content */}
-              <div className="lg:col-span-8">
+              <div
+                className={`lg:col-span-8 ${
+                  blogPostData.language === "brx" ? "notranslate bodo-font" : ""
+                }`}
+              >
                 {/* Title */}
                 <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 leading-snug line-clamp-3">
                   {blogPostData.title}

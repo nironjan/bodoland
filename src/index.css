@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Voltaire&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @plugin "@tailwindcss/typography";
@@ -9,6 +10,7 @@
 @theme {
     --font-display: "Urbanist", sans-serif;
     --navbar-font: "Voltaire", sans-serif;
+    --bodo-font: "Mukta", sans-serif;
     --breakpoint-3xl: 1920px;
     --color-primary: #00A7F3;
 }
@@ -33,6 +35,10 @@
 .logo-font{
    font-family: var(--navbar-font);
 } 
+
+.bodo-font{
+    font-family: var(--bodo-font);
+}
     
 
 

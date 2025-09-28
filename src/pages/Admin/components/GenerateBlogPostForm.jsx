@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { LuLoaderCircle } from "react-icons/lu";
-import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../utils/axiosInstance";
 import { API_PATHS } from "../../../utils/apiPaths";
 import Input from "../../../components/Inputs/Input";
@@ -17,8 +16,6 @@ const GenerateBlogPostForm = ({
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const navigate = useNavigate();
 
   const handleChange = (key, value) => {
     setFormData((prevData) => ({
@@ -49,8 +46,8 @@ const GenerateBlogPostForm = ({
         }
       );
 
-      const generatedPost = aiResponse.data;
-      setPostContent(title, generatedPost || "");
+      const generatedPost = aiResponse.data?.article || "";
+      setPostContent(title, generatedPost);
       handleCloseForm();
     } catch (error) {
       if (error.response && error.response.data.message) {

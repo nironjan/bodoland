@@ -37,6 +37,7 @@ const BlogPostEditor = ({ isEdit }) => {
     tags: "",
     isDraft: "",
     generatedByAI: false,
+    language: "en",
   });
 
   const [postIdeas, setPostIdeas] = useState([]);
@@ -63,7 +64,7 @@ const BlogPostEditor = ({ isEdit }) => {
       const aiResponse = await axiosInstance.post(
         API_PATHS.AI.GENERATE_BLOG_POST_IDEAS,
         {
-          topics: "React JS, Nect JS, Node JS, React UI Components",
+          topics: "latest news around Assam",
         }
       );
       const generatedIdeas = aiResponse.data;
@@ -130,6 +131,7 @@ const BlogPostEditor = ({ isEdit }) => {
         tags: postData.tags,
         isDraft: isDraft ? true : false,
         generatedByAI: true,
+        language: postData.language,
       };
 
       const response = isEdit
@@ -176,6 +178,7 @@ const BlogPostEditor = ({ isEdit }) => {
           tags: Array.isArray(data.tags) ? data.tags : [],
           isDraft: !!data.isDraft,
           generatedByAI: !!data.generatedByAI,
+          language: data.language || "en",
         }));
       }
     } catch (error) {
@@ -328,6 +331,20 @@ const BlogPostEditor = ({ isEdit }) => {
                   ]}
                 />
               </div>
+            </div>
+
+            <div className="mt-3">
+              <label className="text-sm font-medium text-slate-600 mb-1 block">
+                Language
+              </label>
+              <select
+                value={postData.language}
+                onChange={(e) => handleValueChange("language", e.target.value)}
+                className="form-input w-full py-2 px-3 border border-gray-300 rounded-md"
+              >
+                <option value="en">English</option>
+                <option value="brx">Bodo</option>
+              </select>
             </div>
 
             <div className="mt-3">
