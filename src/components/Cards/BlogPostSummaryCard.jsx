@@ -9,7 +9,6 @@ const BlogPostSummaryCard = ({
   tags,
   updatedOn,
   authorName,
-  authProfileImg,
   onClick,
 }) => {
   const navigate = useNavigate();
@@ -46,16 +45,18 @@ const BlogPostSummaryCard = ({
         </div>
 
         <div className="flex items-center">
-          <ImageKit
+          {/* <ImageKit
             src={authProfileImg}
             alt={authorName}
             className="w-8 h-8 rounded-full mr-2"
             w={32}
             h={32}
-          />
+          /> */}
 
           <div>
-            <p className="text-gray-600 text-sm">{authorName}</p>
+            <p className="text-gray-600 text-sm">
+              <span className="font-semibold">By</span> {authorName}
+            </p>
             <p className="text-gray-500 text-xs">{updatedOn}</p>
           </div>
         </div>

@@ -47,16 +47,10 @@ const FeaturedBlogPost = ({
           </div>
 
           <div className="flex items-center">
-            <ImageKit
-              src={authorProfileImg}
-              alt={authorName}
-              className="w-6 h-6 rounded-full mr-2"
-              w={24}
-              h={24}
-            />
-
             <div>
-              <p className="text-sm text-gray-600">{authorName}</p>
+              <p className="text-sm text-gray-600">
+                <span className="font-semibold">By</span> {authorName}
+              </p>
               <p className="text-xs text-gray-500">{updatedOn}</p>
             </div>
           </div>

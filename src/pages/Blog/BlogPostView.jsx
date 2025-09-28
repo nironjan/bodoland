@@ -17,6 +17,7 @@ import CommentInfoCard from "../Blog/components/CommentInfoCard";
 import toast from "react-hot-toast";
 import LikeCommentButton from "./components/LikeCommentButton";
 import Meta from "../../components/Meta";
+import NotFound from "../../components/NotFound";
 
 const BlogPostView = () => {
   const { slug } = useParams();
@@ -26,16 +27,17 @@ const BlogPostView = () => {
 
   const [blogPostData, setBlogPostData] = useState(null);
   const [comments, setComments] = useState(null);
+  const [_relatedPosts, setRelatedPosts] = useState([]);
+  const [injectedContent, setInjectedContent] = useState("");
 
   const { user, setOpenAuthForm } = useContext(UserContext);
 
   const [replyText, setReplyText] = useState("");
   const [showReplyForm, setShowReplyForm] = useState(false);
 
-  // const [openSummarizeDrawer, setSummarizeDrawer] = useState(false);
-  // const [summaryContent, setSummaryContent] = useState("");
+  const [notFound, setNotFound] = useState(false);
 
-  const [setOpenDeleteAlert] = useState({
+  const [_openDeleteAlert, setOpenDeleteAlert] = useState({
     open: false,
     data: null,
   });
@@ -47,6 +49,7 @@ const BlogPostView = () => {
   const fetchPostDetailsBySlug = async () => {
     try {
       setIsLoading(true);
+
       const response = await axiosInstance.get(
         API_PATHS.POSTS.GET_BY_SLUG(slug)
       );
@@ -56,12 +59,71 @@ const BlogPostView = () => {
         setBlogPostData(data);
         fetchCommentByPostId(data._id);
         incrementViews(data._id);
+
+        // fetch related posts
+        if (data.tags?.length) {
+          fetchRelatedPosts(data.tags, data._id, data.content);
+        }
+        setNotFound(false);
+      } else {
+        setNotFound(true);
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      if (error.response && error.response.status === 404) {
+        setNotFound(true);
+      } else {
+        console.error("Error fetching data:", error);
+      }
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Fetch related posts by Tags
+  const fetchRelatedPosts = async (tags, postId, content) => {
+    try {
+      const res = await axiosInstance.get(API_PATHS.POSTS.GET_BY_TAG(tags[0]));
+
+      if (res.data) {
+        const filtered = res.data.filter((p) => p._id !== postId);
+        setRelatedPosts(filtered);
+
+        // inject links
+        const injected = injectMultipleLinks(content, filtered);
+        setInjectedContent(injected);
+      }
+    } catch (error) {
+      console.error("Error fetching related posts:", error);
+    }
+  };
+
+  // Inject at least 3 random links at different spots
+  const injectMultipleLinks = (content, relatedPosts) => {
+    if (relatedPosts.length < 3) return content;
+
+    // Pick 3 random posts (no duplicates)
+    const shufled = [...relatedPosts].sort(() => 0.5 - Math.random());
+    const selected = shufled.slice(0, 3);
+
+    const paragraphs = content.split(/\n\s*\n/);
+
+    //Define injection position
+    const positions = [
+      2,
+      Math.floor(paragraphs.length / 2),
+      paragraphs.length - 1,
+    ];
+
+    selected.forEach((post, index) => {
+      const linksBlock = `***"Read Also:"***  [${post.title}](/story/${post.slug})`;
+      const pos =
+        positions[index] < paragraphs.length
+          ? positions[index]
+          : paragraphs.length - 1;
+      paragraphs.splice(pos, 0, linksBlock);
+    });
+
+    return paragraphs.join("\n\n");
   };
 
   //Get Comment by Post ID
@@ -123,6 +185,8 @@ const BlogPostView = () => {
     <BlogLayout>
       {isLoading ? (
         <BlogPostViewSkeleton />
+      ) : notFound ? (
+        <NotFound message="The story you’re looking for doesn’t exist." />
       ) : blogPostData ? (
         <>
           <Meta
@@ -132,7 +196,7 @@ const BlogPostView = () => {
               htmlToText(sanitizeMarkdown(blogPostData.content))?.slice(0, 150)
             }
             image={blogPostData.coverImageUrl}
-            url={`${window.location.origin}/story/${blogPostData.slug}`}
+            url={`${BASE_URL}/story/${blogPostData.slug}`}
             keywords={blogPostData.tags?.join(", ")}
             author={blogPostData.author?.name}
             publishedTime={blogPostData.createdAt}
@@ -153,14 +217,8 @@ const BlogPostView = () => {
                 {/* Meta info */}
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-3 mb-5">
                   <div className="flex items-center gap-1.5">
-                    <ImageKit
-                      src={blogPostData.author.profileImageUrl}
-                      alt={blogPostData.author.name}
-                      className="w-6 h-6 rounded-full"
-                      w={24}
-                      h={24}
-                    />
                     <span className="text-sm text-gray-500 font-medium">
+                      <span className="font-semibold">By </span>
                       {blogPostData.author.name}
                     </span>
                   </div>
@@ -206,17 +264,20 @@ const BlogPostView = () => {
 
                 {/* Markdown content */}
                 <MarkdownContent
-                  content={sanitizeMarkdown(blogPostData?.content || "")}
+                  content={sanitizeMarkdown(
+                    injectedContent || blogPostData?.content || ""
+                  )}
                 />
 
                 {/* Share section */}
                 <div className="mt-8">
                   <SharePost title={blogPostData.title} />
                 </div>
+
+                {/* Comments */}
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <div className="flex items-center justify-between mb-4">
                     <h4 className="text-lg font-semibold">Comments</h4>
-
                     <button
                       className="flex items-center justify-center gap-3 bg-linear-to-r from-sky-500 to-cyan-400 text-xs font-semibold text-white px-5 py-2 rounded-full hover:bg-black hover:text-white cursor-pointer"
                       onClick={() => {
@@ -276,6 +337,7 @@ const BlogPostView = () => {
                       ))}
                   </div>
                 </div>
+
                 <LikeCommentButton
                   postId={blogPostData._id || ""}
                   likes={blogPostData.likes || 0}
