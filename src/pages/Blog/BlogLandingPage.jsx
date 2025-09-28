@@ -12,6 +12,7 @@ import FeaturedPostSkeleton from "../../components/Loader/FeaturedPostSkeleton";
 import BlogCardSkeleton from "../../components/Loader/BlogCardSkeleton";
 import { useSiteSetting } from "../../context/SiteSettingContext";
 import Meta from "../../components/Meta";
+import BlogFooter from "../../components/layouts/BlogLayout/BlogFooter";
 
 const BlogLandingPage = () => {
   const navigate = useNavigate();
@@ -143,7 +144,6 @@ const BlogLandingPage = () => {
               </div>
             )}
           </div>
-
           <div className="col-span-12 md:col-span-3">
             <TrendingPostSection />
           </div>

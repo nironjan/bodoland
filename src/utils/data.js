@@ -89,3 +89,42 @@ export const BLOG_NAVBAR_DATA = [
     path: "/story/tag/react",
   },
 ];
+
+export const BLOG_FOOTER_DATA = [
+  {
+    id: "01",
+    label: "Home",
+    icon: LuLayoutTemplate,
+    path: "/",
+  },
+  {
+    id: "02",
+    label: "About",
+    icon: "",
+    path: "/page/about-us",
+  },
+  {
+    id: "03",
+    label: "Privacy Policy",
+    icon: "",
+    path: "/page/privacy-policy",
+  },
+  {
+    id: "04",
+    label: "Disclaimer",
+    icon: "",
+    path: "/page/disclaimer",
+  },
+  {
+    id: "05",
+    label: "Terms of Use",
+    icon: "",
+    path: "/page/terms-of-use",
+  },
+  {
+    id: "06",
+    label: "Contact Us",
+    icon: "",
+    path: "/page/contact-us",
+  },
+];

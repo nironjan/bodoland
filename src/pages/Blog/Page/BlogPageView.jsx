@@ -47,13 +47,6 @@ const BlogPageView = () => {
         <BlogPageContentSkeleton />
       ) : blogPageData ? (
         <>
-          {/* SEO Meta */}
-          <title>{blogPageData.title}</title>
-          <meta name="description" content={blogPageData.title} />
-          <meta name="og:title" content={blogPageData.title} />
-          <meta name="og:image" content={blogPageData.coverImageUrl} />
-          <meta property="og:type" content="article" />
-
           <Meta
             title={blogPageData.title}
             description={htmlToText(
